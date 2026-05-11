@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing • MissingCash with Ava</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { --primary: #061826; --accent: #f5b942; --text: #1a2a6c; }
+        * { box-sizing: border-box; margin:0; padding:0; }
+        body { font-family:'DM Sans',sans-serif; background:#f5f7fb; color:var(--text); line-height:1.6; }
+        .hero { background: linear-gradient(135deg, #061826, #0b2a3d); color:white; padding:100px 20px; text-align:center; }
+        .logo { font-size:36px; font-weight:800; color:var(--accent); }
+        .pricing-grid { max-width:1200px; margin:40px auto; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:25px; }
+        .card { background:white; border-radius:24px; padding:40px 30px; box-shadow:0 20px 50px rgba(0,0,0,0.1); text-align:center; transition:0.3s; }
+        .card:hover { transform:translateY(-8px); }
+        .popular { border:4px solid var(--accent); position:relative; }
+        .popular::after { content:"BEST VALUE"; position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--accent); color:#061826; padding:6px 24px; border-radius:30px; font-weight:800; font-size:14px; }
+        .price { font-size:62px; font-weight:900; color:var(--primary); margin:15px 0; }
+        .btn-stripe { display:block; background:#1a2a6c; color:white; padding:20px; border-radius:14px; text-decoration:none; font-weight:700; font-size:17px; margin:30px auto 0; }
+        .btn-stripe:hover { background:#000; }
+    </style>
+</head>
+<body>
+
+    <!-- === SHARED HEADER === -->
+    <header style="background:#061826; color:white; padding:15px 20px; position:sticky; top:0; z-index:1000; border-bottom:1px solid #f5b942;">
+      <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+        <a href="index.html" style="font-size:28px; font-weight:800; color:#f5b942; text-decoration:none; display:flex; align-items:center; gap:10px;">
+          <i class="fa-solid fa-coins"></i> MissingCash
+        </a>
+        <nav style="display:flex; gap:20px; flex-wrap:wrap;">
+          <a href="index.html" style="color:white; text-decoration:none;">Home</a>
+          <a href="super.html" style="color:white; text-decoration:none;">Super</a>
+          <a href="crypto.html" style="color:white; text-decoration:none;">Crypto</a>
+          <a href="how-it-works.html" style="color:white; text-decoration:none;">How It Works</a>
+          <a href="pricing.html" style="color:#f5b942; font-weight:700;">Pricing</a>
+        </nav>
+        <a href="pricing.html" style="background:#f5b942; color:#061826; padding:10px 24px; border-radius:12px; font-weight:700; text-decoration:none;">Get Started</a>
+      </div>
+    </header>
+
+    <section class="hero">
+        <div class="logo">MissingCash</div>
+        <h1 style="font-family:'Playfair Display',serif; font-size:52px; margin:20px 0;">Choose Your Recovery + Protection Plan</h1>
+        <p style="max-width:700px; margin:0 auto; font-size:19px;">Ava helps you <strong>find</strong> your money — and <strong>protect</strong> it.</p>
+    </section>
+
+    <div class="pricing-grid">
+
+        <!-- $4.99 Cybersecurity -->
+        <div class="card">
+            <div style="font-size:60px; margin-bottom:10px;">🛡️</div>
+            <h2>Cybersecurity Guide</h2>
+            <div class="price">$4.99</div>
+            <p>Protect yourself from scams &amp; hackers</p>
+            <ul style="text-align:left; margin:25px 0; line-height:2;">
+                <li>Password managers + 2FA</li>
+                <li>Phishing detection</li>
+                <li>Crypto security</li>
+                <li>Ava’s red flag checklist</li>
+            </ul>
+            <a href="https://buy.stripe.com/6oUbJ0eCE4FDbAFaYo4c800" class="btn-stripe">GET GUIDE — $4.99</a>
+        </div>
+
+        <!-- $4.99 Digital Identity -->
+        <div class="card">
+            <div style="font-size:60px; margin-bottom:10px;">🔑</div>
+            <h2>Digital Identity Recovery</h2>
+            <div class="price">$4.99</div>
+            <p>Regain control of hacked accounts</p>
+            <ul style="text-align:left; margin:25px 0; line-height:2;">
+                <li>Recover myGov, email, banking</li>
+                <li>Credit freeze &amp; fraud dispute</li>
+                <li>Dark web monitoring tips</li>
+                <li>Secure your digital life</li>
+            </ul>
+            <a href="https://buy.stripe.com/6oUbJ0eCE4FDbAFaYo4c800" class="btn-stripe">GET GUIDE — $4.99</a>
+        </div>
+
+        <!-- $7.99 Bundle -->
+        <div class="card popular">
+            <div style="font-size:60px; margin-bottom:10px;">🛡️🔑</div>
+            <h2>Protection Bundle</h2>
+            <div class="price">$7.99</div>
+            <p><strong>Both Guides</strong> — Best Value</p>
+            <a href="https://buy.stripe.com/6oUbJ0eCE4FDbAFaYo4c800" class="btn-stripe">GET BOTH GUIDES — $7.99</a>
+        </div>
+
+        <!-- $29.90 Recovery Pass -->
+        <div class="card">
+            <div style="font-size:60px; margin-bottom:10px;">💰</div>
+            <h2>Full Recovery Pass</h2>
+            <div class="price">$29.90</div>
+            <p>National search + Ava guidance</p>
+            <ul style="text-align:left; margin:25px 0; line-height:2;">
+                <li>Super, Bank, ASIC, Shares, Crypto</li>
+                <li>Step-by-step filing help</li>
+                <li>Priority Ava support</li>
+            </ul>
+            <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe">GET RECOVERY PASS — $29.90</a>
+        </div>
+
+        <!-- $39.95 Complete Package -->
+        <div class="card">
+            <div style="font-size:60px; margin-bottom:10px;">🏆</div>
+            <h2>Complete A-to-Z Package</h2>
+            <div class="price">$39.95</div>
+            <p>Recovery Pass + Both Guides</p>
+            <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe">GET COMPLETE PACKAGE — $39.95</a>
+        </div>
+
+    </div>
+
+    <div style="text-align:center; padding:60px 20px; background:white; margin-top:40px;">
+        <p style="font-size:15px; color:#666; max-width:700px; margin:auto;">
+            💳 All payments secured by Stripe • Instant access after purchase • 
+            Ava is ready to help you the moment you buy
+        </p>
+    </div>
+
+    <!-- === SHARED FOOTER === -->
+    <footer style="background:#061826; color:#aaa; padding:60px 20px 30px; text-align:center; margin-top:80px;">
+        <p style="font-size:22px; color:#f5b942; margin-bottom:10px;">MissingCash Australia</p>
+        <p>ABN 52 347 989 391</p>
+        <p>admin@missingcash.com.au | support@missingcash.com.au</p>
+        <div style="margin:25px 0;">
+            <a href="privacy.html" style="color:#aaa; margin:0 12px;">Privacy</a>
+            <a href="terms.html" style="color:#aaa; margin:0 12px;">Terms</a>
+            <a href="faq.html" style="color:#aaa; margin:0 12px;">FAQ</a>
+        </div>
+        <p style="font-size:13px; opacity:0.6;">© 2026 MissingCash • Powered by Ava AI</p>
+    </footer>
+
+</body>
+</html>

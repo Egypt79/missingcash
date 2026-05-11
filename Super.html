@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MissingCash • Lost Super with Ava</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { --primary: #061826; --accent: #f5b942; --text: #1a2a6c; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: #f5f7fb; color: var(--text); }
+        .hero { background: linear-gradient(135deg, #1a2a6c, #2a48ad); color: white; padding: 80px 20px; text-align: center; }
+        .logo { font-size: 36px; font-weight: 800; color: var(--accent); }
+        .btn { background: var(--accent); color: #000; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; }
+        .pricing-card-mc { max-width: 420px; margin: 50px auto; background: white; border: 3px solid #1a2a6c; border-radius: 24px; padding: 45px 35px; text-align: center; }
+        .price-mc { font-size: 62px; font-weight: 900; color: #1a2a6c; margin: 10px 0; }
+        .btn-stripe { display: block; background: #1a2a6c; color: white; padding: 22px; border-radius: 14px; text-decoration: none; font-weight: 700; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="logo"><i class="fa-solid fa-coins"></i> MissingCash</div>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 48px;">Lost Superannuation Recovery</h1>
+        <p>Ava is checking ATO and fund records for your forgotten super — $18.9 Billion is still unclaimed.</p>
+    </section>
+
+    <div style="max-width:900px; margin:40px auto; padding:0 20px; text-align:center;">
+        <button onclick="speakSuper()" class="btn" style="font-size:18px;">Let Ava Search My Super</button>
+    </div>
+
+    <div class="pricing-card-mc">
+        <div class="badge-live" style="background:#2ecc71;color:white;padding:8px 20px;border-radius:50px;">ATO CONNECTED</div>
+        <h3>SUPER RECOVERY PASS</h3>
+        <div class="price-mc">$29.90</div>
+        <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe">RECLAIM MY SUPER WITH AVA</a>
+    </div>
+
+    <script>
+        function speakSuper() {
+            const u = new SpeechSynthesisUtterance("I'm Ava. I'm checking the ATO and all major super funds for your lost retirement money right now.");
+            u.lang = "en-AU"; window.speechSynthesis.speak(u);
+        }
+    </script>
+</body>
+</html>

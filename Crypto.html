@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MissingCash • Crypto Recovery with Ava</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Same styles as index.html - copy from previous response or keep in external CSS later */
+        :root { --primary: #061826; --accent: #f5b942; --dark: #0b2a3d; --text: #1a2a6c; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: #f5f7fb; color: var(--text); line-height: 1.6; }
+        .hero { background: linear-gradient(135deg, #0a1f2e, #1a3a5c); color: white; padding: 80px 20px; text-align: center; }
+        .logo { font-size: 36px; font-weight: 800; color: var(--accent); }
+        .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #000; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 17px; }
+        .pricing-card-mc { max-width: 420px; margin: 40px auto; background: white; border: 3px solid #1a2a6c; border-radius: 24px; padding: 45px 35px; text-align: center; box-shadow: 0 20px 50px rgba(26,42,108,0.1); }
+        .price-mc { font-size: 62px; font-weight: 900; color: #1a2a6c; margin: 10px 0; }
+        .btn-stripe { display: block; background: #1a2a6c; color: white; padding: 22px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 18px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="logo"><i class="fa-solid fa-coins"></i> MissingCash</div>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 48px;">Crypto Recovery with Ava</h1>
+        <p>Ava is scanning blockchains for lost wallets, unclaimed airdrops, and forgotten exchange funds.</p>
+        <button onclick="speakAvaCrypto()" class="btn"><i class="fa-solid fa-volume-high"></i> Talk to Ava</button>
+    </section>
+
+    <div style="max-width:900px; margin:40px auto; padding:0 20px;">
+        <input id="walletInput" style="width:100%; padding:18px; border-radius:16px; border:2px solid #dce5ee; font-size:17px;" placeholder="Enter wallet address or your name">
+        <button onclick="startCryptoSearch()" class="btn" style="width:100%; margin-top:16px; justify-content:center;">Ask Ava to Scan Blockchain</button>
+    </div>
+
+    <div class="pricing-card-mc" style="margin-top:60px;">
+        <div style="background:#2ecc71; color:white; padding:8px 20px; border-radius:50px; display:inline-block; margin-bottom:15px;">BLOCKCHAIN LIVE</div>
+        <h3>Crypto Recovery Pass</h3>
+        <div class="price-mc">$29.90</div>
+        <ul style="text-align:left; margin:25px 0; line-height:2.4;">
+            <li>✅ Lost wallet & private key guidance</li>
+            <li>✅ Unclaimed airdrops & forks</li>
+            <li>✅ Exchange remnant recovery</li>
+            <li>✅ Ava’s personal blockchain checklist</li>
+        </ul>
+        <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe">RECOVER MY CRYPTO WITH AVA</a>
+    </div>
+
+    <script>
+        function speak(text) {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = "en-AU"; u.rate = 0.95; u.pitch = 1.05;
+            window.speechSynthesis.speak(u);
+        }
+        function speakAvaCrypto() {
+            speak("Hey there! I'm diving into the blockchain right now. Lost some crypto? Tell me your wallet or name and I'll help you track it down.");
+        }
+        function startCryptoSearch() {
+            const input = document.getElementById("walletInput").value.trim() || "you";
+            speak(`Scanning the chain for ${input}... I found some promising leads. Unlock the full report and I'll guide you step by step.`);
+            alert("Ava found potential crypto matches! Unlock the $29.90 Recovery Pass to see details.");
+        }
+    </script>
+</body>
+</html>

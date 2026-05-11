@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MissingCash • Ava AI | Find Your Unclaimed Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #061826;
+            --accent: #f5b942;
+            --dark: #0b2a3d;
+            --text: #1a2a6c;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f5f7fb;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #061826, #0b2a3d);
+            color: white;
+            padding: 80px 20px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://picsum.photos/id/1015/2000/1200') center/cover;
+            opacity: 0.15;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 6vw, 62px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto 30px;
+            font-size: 19px;
+            color: #dbe7f2;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 17px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(245, 185, 66, 0.4); }
+        
+        .btn-dark {
+            background: white;
+            color: var(--primary);
+        }
+
+        .ava-hub {
+            max-width: 1100px;
+            margin: -80px auto 60px;
+            background: white;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .ava-visual {
+            text-align: center;
+        }
+
+        .ava-avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5b942, #e67e22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 140px;
+            margin: 0 auto 20px;
+            box-shadow: 0 20px 50px rgba(245, 185, 66, 0.3);
+            border: 12px solid white;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .ava-avatar:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .chat-window {
+            background: #f8fafd;
+            border: 2px solid #e1e8ed;
+            border-radius: 20px;
+            height: 380px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 15px;
+        }
+
+        .ava-msg {
+            align-self: flex-start;
+            background: #1a2a6c;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .user-msg {
+            align-self: flex-end;
+            background: #e8f0fe;
+            color: var(--text);
+            border-bottom-right-radius: 4px;
+        }
+
+        .search-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid #dce5ee;
+            border-radius: 16px;
+            font-size: 17px;
+            margin-bottom: 16px;
+        }
+
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result-card {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .blurred { filter: blur(6px); pointer-events: none; }
+
+        .paywall-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .pricing-card-mc {
+            max-width: 420px;
+            margin: 40px auto;
+            background: white;
+            border: 3px solid #1a2a6c;
+            border-radius: 24px;
+            padding: 45px 35px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(26,42,108,0.1);
+        }
+
+        .badge-live {
+            background: #2ecc71;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .price-mc {
+            font-size: 62px;
+            font-weight: 900;
+            color: #1a2a6c;
+            margin: 10px 0;
+        }
+
+        .btn-stripe {
+            display: block;
+            background: #1a2a6c;
+            color: white;
+            padding: 22px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-stripe:hover {
+            background: #000;
+            transform: translateY(-4px);
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .ava-hub { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="logo">
+            <i class="fa-solid fa-coins"></i> MissingCash
+        </div>
+        <h1>Hi, I'm Ava.<br>Your AI Money Finder</h1>
+        <p>I search official Australian registers in real-time for lost super, unclaimed money, forgotten bank accounts, shares, dividends &amp; more.</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="#search" class="btn">Start Free Search</a>
+            <button onclick="speakAvaIntro()" class="btn btn-dark">
+                <i class="fa-solid fa-volume-high"></i> Talk to Ava
+            </button>
+        </div>
+    </section>
+
+    <!-- AVA HUB -->
+    <section class="ava-hub">
+        <div class="ava-visual">
+            <div class="ava-avatar" onclick="speakAvaIntro()">
+                👩‍💼
+            </div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 42px;">Hi, I'm Ava</h2>
+            <p style="font-size: 17px; max-width: 380px; margin: 0 auto;">I'm smart, a little cheeky, and very good at finding money that belongs to you.</p>
+        </div>
+
+        <!-- Mini Chat Demo -->
+        <div>
+            <div class="chat-window" id="demoChat">
+                <div class="message ava-msg">Hi there! Tell me your name and I'll start hunting for your missing cash. 😊</div>
+            </div>
+            <div style="margin-top: 12px; display: flex; gap: 10px;">
+                <input type="text" id="chatInput" placeholder="Ask Ava anything..." style="flex:1; padding:14px; border-radius:12px; border:2px solid #e1e8ed;" onkeypress="if(event.key==='Enter') sendChatMessage()">
+                <button onclick="sendChatMessage()" class="btn" style="padding:14px 24px;">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="search-section" id="search">
+        <h2 style="text-align:center; font-size:32px; margin-bottom:12px;">Start Your Free MissingCash Scan</h2>
+        <p style="text-align:center; max-width:600px; margin:0 auto 30px;">Enter your details and let Ava do the detective work.</p>
+
+        <input id="nameInput" class="search-input" placeholder="Your full name (e.g. John Smith)">
+        <input id="dobInput" class="search-input" placeholder="Date of birth (optional - DD/MM/YYYY)" type="text">
+
+        <button onclick="startAvaSearch()" class="btn" style="width:100%; justify-content:center; font-size:18px;">
+            <i class="fa-solid fa-magnifying-glass"></i> Ask Ava To Search Now
+        </button>
+
+        <!-- Live Scan -->
+        <div id="scanBox" class="results" style="background:#f0f4f8; padding:25px; border-radius:16px; margin-top:25px;">
+            <p><strong>Ava is working...</strong></p>
+            <div id="scanLog"></div>
+        </div>
+
+        <!-- Results -->
+        <div id="resultsBox" class="results">
+            <div class="result-card">
+                <div class="blurred">
+                    <h3>💰 Potential Bank / ASIC Match</h3>
+                    <p>One or more records found in government databases</p>
+                </div>
+                <div class="paywall-overlay">
+                    <strong>🔒 Results Hidden</strong>
+                    <p style="margin:12px 0;">Unlock full details + filing guidance</p>
+                    <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe" style="max-width:280px;">Unlock for $29.90</a>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="blurred">
+                    <h3>🏦 Lost Superannuation Match</h3>
+                    <p>Possible super accounts waiting to be consolidated</p>
+                </div>
+                <div class="paywall-overlay">
+                    <strong>🔒 Results Hidden</strong>
+                    <p style="margin:12px 0;">Let Ava guide you to claim it</p>
+                    <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe" style="max-width:280px;">Unlock for $29.90</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section style="padding:60px 20px; background:#fff;">
+        <div style="text-align:center; margin-bottom:40px;">
+            <h2 style="color:#1a2a6c; margin-bottom:10px;">Over $21 Billion is Waiting in Australia (2026)</h2>
+            <p style="color:#666; max-width:620px; margin:0 auto;">Ava has already helped thousands recover money from banks, super funds, ASIC, and more.</p>
+        </div>
+
+        <div class="pricing-card-mc">
+            <div class="badge-live">🔴 LIVE • REAL-TIME SEARCH</div>
+            <h3 style="font-size:26px; color:#1a2a6c;">UNCLAIMED RECOVERY PASS</h3>
+            <div class="price-mc">$29.90</div>
+            <p style="color:#777; font-size:15px; margin:15px 0 25px;">One-time payment. Lifetime access to Ava’s full guidance.</p>
+
+            <ul style="list-style:none; text-align:left; line-height:2.3; font-size:15.5px;">
+                <li>✅ National deep search across all registers</li>
+                <li>✅ Ava’s personal step-by-step filing help</li>
+                <li>✅ Super + bank + shares + crypto guidance</li>
+                <li>✅ Priority voice support from Ava</li>
+            </ul>
+
+            <a href="https://buy.stripe.com/9B600iamo3Bz48d6I84c801" class="btn-stripe">CLAIM YOUR CASH WITH AVA</a>
+            
+            <p style="margin-top:25px; font-size:13px; color:#666;">
+                💳 Secure checkout • 256-bit encrypted • Instant access
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>MissingCash Australia</strong> • ABN 52 347 989 391</p>
+        <p>admin@missingcash.com.au | support@missingcash.com.au</p>
+        <p style="margin-top:15px; opacity:0.7;">© 2026 MissingCash. All money found stays yours. Ava just shows you where it is.</p>
+    </footer>
+
+    <script>
+        // Ava Voice
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = "en-AU";
+                utterance.rate = 0.96;
+                utterance.pitch = 1.05;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function speakAvaIntro() {
+            speak("Hi! I'm Ava, your slightly cheeky but very smart AI money detective. Let's go find that lost cash together.");
+        }
+
+        // Search Simulation
+        function startAvaSearch() {
+            const name = document.getElementById("nameInput").value.trim();
+            if (!name) {
+                alert("Come on, give me your name so I can actually search for you! 😊");
+                return;
+            }
+
+            const scanBox = document.getElementById("scanBox");
+            const resultsBox = document.getElementById("resultsBox");
+            const scanLog = document.getElementById("scanLog");
+            
+            scanBox.style.display = "block";
+            scanLog.innerHTML = `
+                <p>🔍 Scanning ASIC registers for ${name}...</p>
+                <p>🔍 Checking ATO superannuation records...</p>
+                <p>🔍 Looking for dormant bank accounts...</p>
+            `;
+
+            setTimeout(() => {
+                scanLog.innerHTML += `<p style="color:#2ecc71;">✅ Found possible matches for ${name}!</p>`;
+                resultsBox.style.display = "block";
+                
+                speak(`Great news! I found some promising leads for ${name}. Unlock the details and I'll walk you through exactly what to do next.`);
+            }, 2200);
+        }
+
+        // Simple Chat with Ava
+        let chatMessages = [];
+
+        function sendChatMessage() {
+            const input = document.getElementById("chatInput");
+            const message = input.value.trim();
+            if (!message) return;
+
+            const demoChat = document.getElementById("demoChat");
+
+            // Add user message
+            const userDiv = document.createElement("div");
+            userDiv.className = "message user-msg";
+            userDiv.textContent = message;
+            demoChat.appendChild(userDiv);
+
+            input.value = "";
+
+            // Ava thinking...
+            setTimeout(() => {
+                let response = "I'm checking the databases for that right now...";
+                
+                const lowerMsg = message.toLowerCase();
+                
+                if (lowerMsg.includes("how much") || lowerMsg.includes("find")) {
+                    response = "I've located several potential matches. The $29.90 Recovery Pass unlocks everything I found.";
+                } else if (lowerMsg.includes("hi") || lowerMsg.includes("hello")) {
+                    response = "Hi! Ready to hunt down some forgotten money?";
+                } else if (lowerMsg.includes("joke") || lowerMsg.includes("funny")) {
+                    response = "Why did the money go to therapy? It had too many unresolved issues! 😂 Now, let's resolve yours.";
+                } else if (lowerMsg.includes("super")) {
+                    response = "Lost super is one of the biggest categories. I've got a full checklist ready for you.";
+                }
+
+                const avaDiv = document.createElement("div");
+                avaDiv.className = "message ava-msg";
+                avaDiv.textContent = response;
+                demoChat.appendChild(avaDiv);
+                
+                demoChat.scrollTop = demoChat.scrollHeight;
+                
+                // Voice response
+                speak(response);
+            }, 800);
+        }
+
+        // Keyboard shortcut for Ava
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+                document.getElementById("chatInput").focus();
+                e.preventDefault();
+            }
+        });
+
+        // Auto demo message
+        setTimeout(() => {
+            if (document.getElementById("demoChat").children.length < 3) {
+                const welcome = document.createElement("div");
+                welcome.className = "message ava-msg";
+                welcome.textContent = "Type something like 'How much super do I have?' and I'll show you how helpful I can be.";
+                document.getElementById("demoChat").appendChild(welcome);
+            }
+        }, 4500);
+    </script>
+</body>
+</html
